@@ -17,4 +17,4 @@ We hope to motivate possibilities for existing content across MIT to find ways i
 If needed, we will round out some of the documentation related to installing in Canvas and other configurations.
 
 ## Demo
-![](static/May27_OCW_YouTube_Canvas_low.gif)
+![](static/May27_OCW_YouTube_Canvas_med.gif)
