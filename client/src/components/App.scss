@@ -1,0 +1,29 @@
+@use '../styles/colors';
+@use "@material/theme" with (
+  $primary: colors.$alizarin-crimson,
+  $on-primary: colors.$white,
+  $secondary: brown,
+  $on-secondary: brown,
+  $surface: brown,
+  $on-surface: green,
+  // $text-primary-on-light: brown,
+  // $text-secondary-on-light: brown,
+  // $text-hint-on-light: brown,
+  // $text-disabled-on-light: brown,
+  // $text-icon-on-light: brown,
+  // $text-primary-on-dark: brown,
+  // $text-secondary-on-dark: brown,
+  // $text-hint-on-dark: brown,
+  // $text-disabled-on-dark: brown,
+  // $text-icon-on-dark:brown,
+);
+@use "@material/button/mdc-button";
+@use "@material/button";
+@use '@material/textfield/mdc-text-field';
+@use '@material/textfield';
+
+.app {
+  min-width: 500px;
+  max-width: 768px;
+  margin: 0 auto;
+}
