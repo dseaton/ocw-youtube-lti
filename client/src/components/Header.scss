@@ -1,0 +1,27 @@
+@use "@material/icon-button/mdc-icon-button";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  background: color(header-background);
+  color: color(header-foreground);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 5rem;
+
+  &__left-items {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; 
+    flex: 1 1 auto;
+    max-width: 57.5rem;
+  }
+
+  &__right-items {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+}
