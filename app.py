@@ -6,7 +6,7 @@ from flask import current_app, Flask, make_response, redirect, render_template, 
 from pylti.flask import lti
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='./client/build', static_url_path='/')
 app.config.from_object('config')
 
 def error(exception=None):
@@ -27,9 +27,9 @@ def hello_world(lti=lti):
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET'])
-@lti(request='initial', error=error, app=app)
+# @lti(request='initial', error=error, app=app)
 def index(lti=lti):
-    return render_template('index.html')
+    return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)
