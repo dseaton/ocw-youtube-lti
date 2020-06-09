@@ -36,6 +36,7 @@ def index(lti=lti):
 def search(lti=lti):
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     video_url = 'https://www.googleapis.com/youtube/v3/videos'
+    caption_url = 'https://www.googleapis.com/youtube/v3/captions/'
 
     videos = []
 
@@ -44,7 +45,7 @@ def search(lti=lti):
             'key' : current_app.config['YOUTUBE_API_KEY'],
             'q' : request.form.get('query'),
             'part' : 'snippet',
-            'maxResults' : 9,
+            'maxResults' : 12,
             'type' : 'video',
             'channelId' : 'UCEBb1b_L6zDS3xTUrIALZOw',
         }
@@ -64,7 +65,7 @@ def search(lti=lti):
             'key' : current_app.config['YOUTUBE_API_KEY'],
             'id' : ','.join(video_ids),
             'part' : 'snippet,contentDetails',
-            'maxResults' : 9,
+            'maxResults' : 12,
         }
 
         r = requests.get(video_url, params=video_params)
@@ -79,6 +80,8 @@ def search(lti=lti):
             }
             videos.append(video_data)
         
+        r = requests.get(caption_url+videos[3]['id'])
+
         if request.form.get('submit') == 'embed':
             return render_template('reuse.html', error=error)
 

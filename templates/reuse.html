@@ -5,12 +5,6 @@
     <title>OCW YouTube LTI Reuse</title>
 </head>
 
-<!-- <script type="text/javascript">
-  window.onload = function() {
-    document.getElementById('lti-content-item-return-form').submit();
-  };
-</script> -->
-
 <body>
     <form action="https://canvas.instructure.com/courses/2027589/external_content/success/external_tool_dialog"
       id="lti-content-item-return-form"
@@ -22,7 +16,7 @@
       <input type="hidden" name="title" value="{{ video.title }}"/>
       <input type="hidden" name="width" value="560"/>
       <input type="hidden" name="height" value="315"/>
-    <button type="submit" name="submit" value="embed">Embed</button>
+    <button type="submit" name="submit" value="embed" class="btn btn-sm btn-outline-secondary">Embed</button>
   </form>
 </body>
 </html>
