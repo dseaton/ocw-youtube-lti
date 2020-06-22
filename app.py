@@ -2,7 +2,7 @@ import os
 import requests
 
 from isodate import parse_duration
-from flask import current_app, Flask, make_response, redirect, render_template, request
+from flask import current_app, Flask, jsonify, make_response, redirect, render_template, request
 from pylti.flask import lti
 
 
@@ -32,8 +32,9 @@ def index(lti=lti):
     return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
-@lti(request='session', error=error, app=app)
-def search(lti=lti):
+# @lti(request='session', error=error, app=app)
+# def search(lti=lti):
+def search():
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     video_url = 'https://www.googleapis.com/youtube/v3/videos'
     caption_url = 'https://www.googleapis.com/youtube/v3/captions/'
@@ -45,7 +46,7 @@ def search(lti=lti):
             'key' : current_app.config['YOUTUBE_API_KEY'],
             'q' : request.form.get('query'),
             'part' : 'snippet',
-            'maxResults' : 12,
+            'maxResults' : 8,
             'type' : 'video',
             'channelId' : 'UCEBb1b_L6zDS3xTUrIALZOw',
         }
@@ -65,7 +66,7 @@ def search(lti=lti):
             'key' : current_app.config['YOUTUBE_API_KEY'],
             'id' : ','.join(video_ids),
             'part' : 'snippet,contentDetails',
-            'maxResults' : 12,
+            'maxResults' : 8,
         }
 
         r = requests.get(video_url, params=video_params)
@@ -77,6 +78,7 @@ def search(lti=lti):
                 'thumbnail' : result['snippet']['thumbnails']['high']['url'],
                 'duration' : int(parse_duration(result['contentDetails']['duration']).total_seconds() // 60),
                 'title' : result['snippet']['title'],
+                'description': result['snippet']['description']
             }
             videos.append(video_data)
         
@@ -85,7 +87,7 @@ def search(lti=lti):
         if request.form.get('submit') == 'embed':
             return render_template('reuse.html', error=error)
 
-    return render_template('results.html', videos=videos)
+    return jsonify(videos)
 
 @app.route('/lti/reuse', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)

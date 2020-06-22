@@ -1,0 +1,49 @@
+@use '../styles/functions/color';
+@use '../styles/colors';
+@use '@material/button';
+
+.video-card {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  background: color.color(card-background);
+  // Add shadows
+  box-shadow: 0 2px 4px 0 color.color(card-border);
+  transition: 0.3s;
+
+  &:hover {
+    box-shadow: 0 4px 8px 0 color.color(card-border);
+  }
+  
+  &__image {
+    object-fit: cover;
+    width: 30%;
+    height: 135px;
+  }
+
+  &__content {
+    padding-left: 1rem;
+  }
+
+  &__title {
+    font-size: 24px;
+    color: black;
+  }
+
+  &__description, &__footer {
+    padding-top: 0.25rem;
+    font-size: 14px;
+    color: color.color(card-duration);
+  }
+
+  &__duration {
+    margin-left: 6rem;
+  }
+
+  .video-card__button {
+    margin-right: 2rem;
+    @include button.container-fill-color(color.color(card-background));
+    @include button.ink-color(color.color(card-button-foreground));
+  }
+}
