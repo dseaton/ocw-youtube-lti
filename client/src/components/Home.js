@@ -54,11 +54,12 @@ export default function Home() {
   ) : (
     Object.keys(videos).map((key) => (
       <VideoCard
-        key={shortid()}
-        title={videos[key].title}
-        thumbnail={videos[key].thumbnail}
-        duration={videos[key].duration}
         description={videos[key].description}
+        duration={videos[key].duration}
+        id={key}
+        key={shortid()}
+        thumbnail={videos[key].thumbnail}
+        title={videos[key].title}
       />
     ))
   );
