@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button } from '@rmwc/button';
 import truncate from 'truncate';
 import './VideoCard.scss';
 
-export default function VideoCard({ title, description, thumbnail, duration }) {
+export default function VideoCard(props) {
+  const { description, duration, id, thumbnail, title } = props;
+  const url = `https://www.youtube.com/embed/${id}`;
+  const formEl = useRef(null);
+
+  const handleEmbedButtonClick = () => {
+    formEl.current.submit();
+  };
+  
   return (
     <div className="video-card">
       <img
@@ -17,10 +25,23 @@ export default function VideoCard({ title, description, thumbnail, duration }) {
         <div className="video-card__title">{truncate(title, 40)}</div>
         <div className="video-card__description">{truncate(description, 140)}</div>
         <div className="video-card__footer">
-          <Button className="video-card__button" label="EMBED NOW" unelevated />
-          <Button className="video-card__button" label="SELECT CLIP" unelevated />
+          <Button className="video-card__button" label="EMBED NOW" unelevated onClick={handleEmbedButtonClick}/>
+          <Button className="video-card__button" label="SELECT CLIP" disabled unelevated />
           <span className="video-card__duration">{duration} mins</span>
         </div>
+        <form
+          action="https://canvas.instructure.com/courses/2066466/external_content/success/external_tool_dialog"
+          id="lti-content-item-return-form"
+          method="POST"
+          encType="application/x-www-form-urlencoded"
+          ref={formEl}
+        >
+          <input type="hidden" name="return_type" value="iframe" />
+          <input type="hidden" name="url" value={url} />
+          <input type="hidden" name="title" value={title} />
+          <input type="hidden" name="width" value="560" />
+          <input type="hidden" name="height" value="315" />
+        </form>
       </div>
     </div>
   );
