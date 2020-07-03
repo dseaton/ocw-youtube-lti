@@ -27,14 +27,14 @@ def hello_world(lti=lti):
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET'])
-# @lti(request='initial', error=error, app=app)
+@lti(request='initial', error=error, app=app)
 def index(lti=lti):
     return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
-# @lti(request='session', error=error, app=app)
-# def search(lti=lti):
-def search():
+@lti(request='session', error=error, app=app)
+def search(lti=lti):
+# def search():
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     video_url = 'https://www.googleapis.com/youtube/v3/videos'
     caption_url = 'https://www.googleapis.com/youtube/v3/captions/'
