@@ -2,9 +2,9 @@
   "name": "ocw-youtube-lti",
   "version": "0.1.0",
   "private": true,
-  "engines": { 
+  "engines": {
     "node": "14.4.0"
-  }, 
+  },
   "scripts": {
     "heroku-postbuild": "cd client && npm install && npm run build"
   }
