@@ -1,3 +1,39 @@
+From the client directory:
+
+```
+npm install
+npm start
+```
+
+The start command automatically open your default browser at the following address: http://localhost:3000/
+
+The flask backend must be started before one can actually search. Create a virtual environment and start the app.
+```
+python -m venv venv
+. venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
+
+The flask app is visible at: http://localhost:5000/
+
+In the `client/package.json`, you'll see the following line for the proxy: 
+`"proxy": "http://localhost:5000"`
+
+Anything that is not on port 3000 will be redirected to 5000. You have to add a `.env` file at the same level as `package.json`
+Create the `.env` file with the following contents:
+```
+REACT_APP_API_URL='/'
+REACT_APP_API_PORT='5000'
+```
+Axios uses `REACT_APP_API_PORT='5000'` to do its http request that will hit the Flask BE. 
+
+From `/client`, run `npm build`. Once completed, open your browser at the Flask server at http://127.0.0.1:5000/ and you'll see the React build!
+
+PLACEHOLDER FOR HEROKU
+* You must add the nodejs buildpack within the settings of your heroku app.
+* You also need to add the YouTube API key to your configuration variables on heroku.com
+
 # ocw-youtube-lti
 Search and embed OCW YouTube videos from the (https://community.canvaslms.com/docs/DOC-10728-what-is-the-rich-content-editor)[Canvas RCE] (Rich Content Editor). (https://www.imsglobal.org/activity/learning-tools-interoperability)Canvas App integrations via [LTI] (Learning Technology Interoperability) allow tools for creating/integrating content to be directly added to a course authors workflow (RCE). 
 
