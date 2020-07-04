@@ -2,7 +2,7 @@ From the client directory:
 
 ```
 npm install
-npm start
+npm run start
 ```
 
 The start command automatically open your default browser at the following address: http://localhost:3000/
@@ -20,15 +20,9 @@ The flask app is visible at: http://localhost:5000/
 In the `client/package.json`, you'll see the following line for the proxy: 
 `"proxy": "http://localhost:5000"`
 
-Anything that is not on port 3000 will be redirected to 5000. You have to add a `.env` file at the same level as `package.json`
-Create the `.env` file with the following contents:
-```
-REACT_APP_API_URL='/'
-REACT_APP_API_PORT='5000'
-```
-Axios uses `REACT_APP_API_PORT='5000'` to do its http request that will hit the Flask BE. 
+Any request that is not on port 3000 will be redirected to 5000. 
 
-From `/client`, run `npm build`. Once completed, open your browser at the Flask server at http://127.0.0.1:5000/ and you'll see the React build!
+From `/client`, type `npm run build`. Once completed, open your browser at the Flask server at http://127.0.0.1:5000/ and you'll see the React build!
 
 PLACEHOLDER FOR HEROKU
 * You must add the nodejs buildpack within the settings of your heroku app.
