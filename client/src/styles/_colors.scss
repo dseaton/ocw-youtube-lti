@@ -1,3 +1,4 @@
+@use 'sass:color';
 // Color names come from the following sites:
 // http://chir.ag/projects/name-that-color
 
@@ -26,7 +27,8 @@ $default-palette: (
     'background': $alabaster,
     'border': $black-20,
     'duration': $boulder,
-    'button-foreground': $burnt-sienna
+    'button-foreground': $burnt-sienna,
+    'disabled-button-foreground': color.scale($burnt-sienna, $alpha: -50%)
   ),
   'footer': (
     'background':   $black,

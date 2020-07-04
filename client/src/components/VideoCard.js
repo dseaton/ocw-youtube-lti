@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Button } from '@rmwc/button';
+import { Tooltip } from '@rmwc/tooltip';
 import truncate from 'truncate';
 import './VideoCard.scss';
 
@@ -26,7 +27,9 @@ export default function VideoCard(props) {
         <div className="video-card__description">{truncate(description, 140)}</div>
         <div className="video-card__footer">
           <Button className="video-card__button" label="EMBED NOW" unelevated onClick={handleEmbedButtonClick}/>
-          <Button className="video-card__button" label="SELECT CLIP" disabled unelevated />
+          <Tooltip content="Coming soon" showArrow>
+            <Button className="video-card__button video-card__button--disabled" label="SELECT CLIP" unelevated />
+          </Tooltip>
           <span className="video-card__duration">{duration} mins</span>
         </div>
         <form
