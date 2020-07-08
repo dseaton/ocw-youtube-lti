@@ -7,7 +7,7 @@
   </blti:icon>
   <blti:vendor/>
   <blti:extensions platform="canvas.instructure.com">
-    <lticm:property name="domain">ocw-youtube-lti.herokuapp.com/</lticm:property>
+    <lticm:property name="domain">ocw-youtube-lti.herokuapp.com</lticm:property>
     <lticm:options name="editor_button">
       <lticm:property name="enabled">true</lticm:property>
       <lticm:property name="icon_url">
