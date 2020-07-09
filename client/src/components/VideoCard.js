@@ -33,7 +33,7 @@ export default function VideoCard(props) {
           <span className="video-card__duration">{duration} mins</span>
         </div>
         <form
-          action="https://canvas.instructure.com/courses/2066466/external_content/success/external_tool_dialog"
+          action="https://mit.test.instructure.com/courses/5329/external_content/success/external_tool_dialog"
           id="lti-content-item-return-form"
           method="POST"
           encType="application/x-www-form-urlencoded"
