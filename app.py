@@ -23,13 +23,21 @@ def hello_world(lti=lti):
     :return: simple page that indicates the request was processed by the lti
         provider
     """
-    return render_template('up.html', lti=lti)
+    response = make_response(render_template('up.html', lti=lti))
+    # response.set_cookie('session', lti.session, httponly=True, samesite='None', secure=True)
+    # response.headers.add('Set-Cookie','cross-site-cookie=session; SameSite=None; Secure')
+    return response
+    # return render_template('up.html', lti=lti)
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET'])
 @lti(request='initial', error=error, app=app)
 def index(lti=lti):
-    return app.send_static_file('index.html')
+    response = app.send_static_file('index.html')
+    # response.set_cookie('session',lti.session,  httponly=True, samesite='None', secure=True)
+    # response.headers.add('Set-Cookie','cross-site-cookie=session; SameSite=None; Secure')
+    return response
+    # return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)
@@ -85,14 +93,25 @@ def search(lti=lti):
         r = requests.get(caption_url+videos[3]['id'])
 
         if request.form.get('submit') == 'embed':
-            return render_template('reuse.html', error=error)
-
-    return jsonify(videos)
+            response = make_response(render_template('reuse.html', error=error))
+            # response.set_cookie('session', lti.session, httponly=True, samesite='None', secure=True)
+            # response.headers.add('Set-Cookie','cross-site-cookie=session; SameSite=None; Secure')
+            return response
+            # return render_template('reuse.html', error=error)
+    response = jsonify(videos)
+    # response.set_cookie('session', lti.session, httponly = True, samesite='None', secure=True)
+    # response.headers.add('Set-Cookie','cross-site-cookie=session; SameSite=None; Secure')
+    return response
+    # return jsonify(videos)
 
 @app.route('/lti/reuse', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)
 def reuse(lti=lti):
-    return render_template('reuse.html', error=error)
+    response = make_response(render_template('reuse.html', error=error))
+    # response.set_cookie('session', lti.session, httponly=True, samesite='None', secure=True)
+    # response.headers.add('Set-Cookie','cross-site-cookie=session; SameSite=None; Secure')
+    return response
+    # return render_template('reuse.html', error=error)
 
 @app.route('/lti/config.xml', methods=['GET'])
 def config(lti=lti):
@@ -100,6 +119,8 @@ def config(lti=lti):
     template = render_template('config.xml')
     response = make_response(template)
     response.headers['Content-Type'] = 'application/xml'
+    # response.set_cookie('session', lti.session, httponly=True, samesite='None', secure=True)
+    # response.headers.add('Set-Cookie','cross-site-cookie=session; SameSite=None; Secure')
     return response
 
 def set_debugging():

@@ -33,3 +33,8 @@ PYLTI_CONFIG = {
         }
     }
 }
+
+# https://flask.palletsprojects.com/en/1.1.x/config/
+
+# SESSION_COOKIE_SAMESITE can take the values: 'Lax', 'Strict', or None (default), no support for 'none' yet 
+SESSION_COOKIE_SECURE = True
