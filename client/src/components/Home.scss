@@ -20,7 +20,7 @@
     margin-right: 1.5rem;
   }
 
-  &__results-message {
+  &__loading-message, &__results-message, &__error-message {
     font-size: 14px;
     margin : 0.5rem 0;
   }

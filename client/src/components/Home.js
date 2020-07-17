@@ -13,6 +13,7 @@ export default function Home() {
   const [isError, setIsError] = useState(false);
   const [videos, setVideos] = useState({});
   const [resultsMessage, setResultsMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   
   useEffect(() => {
     const loadVideos = async () => {
@@ -31,6 +32,7 @@ export default function Home() {
         }
       } catch(error) {
         setIsError(true);
+        setErrorMessage(`Sorry, we didn't find any results for "${search}" term.`)
       }
       setIsLoading(false);
     };
@@ -50,7 +52,9 @@ export default function Home() {
   const buttonClick = () => setSearch(query);
 
   const videosEl = isLoading ? (
-    <div>Loading...</div>
+    <div className="home__loading-message">
+      Loading...
+    </div>
   ) : (
     Object.keys(videos).map((key) => (
       <VideoCard
@@ -75,7 +79,11 @@ export default function Home() {
         onKeyUp={inputKeyUp}
       />
       <Button label="Search" unelevated onClick={buttonClick}/>
-      {isError && <div>Error...</div>}
+      {isError && (
+        <div className="home__error-message">
+          {errorMessage}
+        </div>
+      )}
       <div className="home__results-message">
         {resultsMessage}
       </div>
