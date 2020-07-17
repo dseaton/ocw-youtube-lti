@@ -18,6 +18,7 @@ export default function Home() {
   useEffect(() => {
     const loadVideos = async () => {
       setResultsMessage('');
+      setErrorMessage('');
       setIsLoading(true);
       setIsError(false);
       try {
@@ -51,12 +52,22 @@ export default function Home() {
   
   const buttonClick = () => setSearch(query);
 
-  const videosEl = isLoading ? (
-    <div className="home__loading-message">
-      Loading...
-    </div>
-  ) : (
-    Object.keys(videos).map((key) => (
+  let resultsEl;
+
+  if (isLoading) {
+    resultsEl = (
+      <div className="home__loading-message">
+        Loading...
+      </div>
+    );
+  } else if (isError) {
+    resultsEl = (
+      <div className="home__error-message">
+          {errorMessage}
+      </div>
+    );
+  } else {
+    const videosEl = Object.keys(videos).map((key) => (
       <VideoCard
         description={videos[key].description}
         duration={videos[key].duration}
@@ -65,8 +76,16 @@ export default function Home() {
         thumbnail={videos[key].thumbnail}
         title={videos[key].title}
       />
-    ))
-  );
+    ));
+    resultsEl = (
+      <>
+        <div className="home__results-message">
+          {resultsMessage}
+        </div>
+        {videosEl}
+      </>
+    );
+  }
   
   return (
     <main className="home">
@@ -79,15 +98,7 @@ export default function Home() {
         onKeyUp={inputKeyUp}
       />
       <Button label="Search" unelevated onClick={buttonClick}/>
-      {isError && (
-        <div className="home__error-message">
-          {errorMessage}
-        </div>
-      )}
-      <div className="home__results-message">
-        {resultsMessage}
-      </div>
-      {videosEl}
+      {resultsEl}
     </main>
   );
 }
