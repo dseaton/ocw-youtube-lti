@@ -15,6 +15,7 @@ export default function Home() {
   const [videos, setVideos] = useState({});
   const [resultsMessage, setResultsMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showContext, setShowContext ] = useState(true);
   
   useEffect(() => {
     const loadVideos = async () => {
@@ -48,6 +49,7 @@ export default function Home() {
     // 'Enter' key code
     if (event.keyCode === 13) {
       setSearch(query);
+      setShowContext(false);
     }
   }
   
@@ -99,7 +101,7 @@ export default function Home() {
         onKeyUp={inputKeyUp}
       />
       <Button label="Search" unelevated onClick={buttonClick}/>
-      <Context />
+      {showContext && <Context/>}
       {resultsEl}
     </main>
   );
