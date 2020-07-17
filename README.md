@@ -38,7 +38,7 @@ Two codebases were utlized together in order to show this proof of concept.
 * PyLTI is an MIT maintained package that streamlines LTI implementations; it drastically simplified this prototype.
 
 ## Demo
-![](static/May27_OCW_YouTube_Canvas_low.gif)
+![](static/Jul-14-2020_OCW_YouTube_LTI_tool.gif)
 
 ## Things you will need
 This app should be deployable on Heroku with minimal changes. 

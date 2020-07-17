@@ -4,6 +4,7 @@ import { TextField } from '@rmwc/textfield';
 import searchService from '../core/services/SearchService';
 import shortid from '../utils/shortid';
 import VideoCard from './VideoCard';
+import Context from './Context';
 import './Home.scss';
 
 export default function Home() {
@@ -98,6 +99,7 @@ export default function Home() {
         onKeyUp={inputKeyUp}
       />
       <Button label="Search" unelevated onClick={buttonClick}/>
+      <Context />
       {resultsEl}
     </main>
   );
