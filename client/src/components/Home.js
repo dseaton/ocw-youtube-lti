@@ -27,6 +27,7 @@ export default function Home() {
         // Do not send a request for an empty string
         if (search) {
           const videos = await searchService.search(search);
+          setShowContext(false);
           setVideos(videos);
           setResultsMessage(Object.keys(videos).length > 0 ?
             'Top 8 results from the OCW YouTube channel. Load more below.' :
@@ -49,7 +50,6 @@ export default function Home() {
     // 'Enter' key code
     if (event.keyCode === 13) {
       setSearch(query);
-      setShowContext(false);
     }
   }
   
