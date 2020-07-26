@@ -16,8 +16,8 @@
     @include textfield.hover-outline-color(colors.$white);
     @include textfield.height(36px); // 2.25rem
     @include textfield.outlined-height(36px);
-    min-width: 37.5rem;
-    margin-right: 1.5rem;
+    min-width: 38rem;
+    margin-right: 2.1rem;
   }
 
   &__loading-message, &__results-message, &__error-message {
