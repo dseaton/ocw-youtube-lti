@@ -1,3 +1,6 @@
 import os 
 
 YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
+
+SESSION_COOKIE_SECURE=True
+SESSION_COOKIE_SAMESITE='None'
