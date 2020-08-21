@@ -188,7 +188,7 @@ def _post_patched_request(consumers, lti_key, body,
         url,
         method,
         body=body.encode('utf-8'),
-        headers={'Content-Type': content_type, 'Set-Cookie': 'cross-site-cookie=bar; SameSite=None; Secure'})
+        headers={'Content-Type': content_type, 'Set-Cookie': 'SameSite=None; Secure'})
 
     http = httplib2.Http
     # pylint: disable=protected-access
