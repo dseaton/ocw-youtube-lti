@@ -23,18 +23,22 @@ def hello_world(lti=lti):
     :return: simple page that indicates the request was processed by the lti
         provider
     """
-    return render_template('up.html', lti=lti)
+    resp = make_response(render_template('up.html', lti=lti))
+    resp.set_cookie('cross-site-cookie', 'bar', samesite='None', secure=True)
+    resp.headers.add('Content-Security-Policy', "default-src 'self'")
+    return resp
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET'])
-@lti(request='initial', error=error, app=app)
-def index(lti=lti):
+# @lti(request='initial', error=error, app=app)
+# def index(lti=lti):
+def index():
     return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
-@lti(request='session', error=error, app=app)
-def search(lti=lti):
-# def search():
+# @lti(request='session', error=error, app=app)
+# def search(lti=lti):
+def search():
     search_url = 'https://www.googleapis.com/youtube/v3/search'
     video_url = 'https://www.googleapis.com/youtube/v3/videos'
     caption_url = 'https://www.googleapis.com/youtube/v3/captions/'
@@ -87,12 +91,16 @@ def search(lti=lti):
         if request.form.get('submit') == 'embed':
             return render_template('reuse.html', error=error)
 
-    return jsonify(videos)
+    resp = make_response(jsonify(videos))
+    resp.set_cookie('cross-site-cookie', 'bar', samesite='None', secure=True)
+    return resp
 
 @app.route('/lti/reuse', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)
 def reuse(lti=lti):
-    return render_template('reuse.html', error=error)
+    resp = make_response(render_template('reuse.html', error=error))
+    resp.set_cookie('cross-site-cookie', 'bar', samesite='None', secure=True)
+    return resp
 
 @app.route('/lti/config.xml', methods=['GET'])
 def config(lti=lti):
