@@ -24,7 +24,11 @@ def hello_world(lti=lti):
         provider
     """
     resp = make_response(render_template('up.html', lti=lti))
-    resp.set_cookie('cookie', 'value', samesite='None', secure=True)
+# Set a same-site cookie for first-party contexts
+    resp.set_cookie('cookie1', 'value1', samesite='Lax')
+    # Ensure you use "add" to not overwrite existing cookie headers
+    # Set a cross-site cookie for third-party contexts
+    resp.headers.add('Set-Cookie','cookie2=value2; SameSite=None; Secure')
     return resp
 
 @app.route('/', methods=['GET', 'POST'])
