@@ -32,6 +32,11 @@ def hello_world(lti=lti):
 @lti(request='initial', error=error, app=app)
 def index(lti=lti):
 # def index():
+    # Set a same-site cookie for first-party contexts
+    resp.set_cookie('cookie1', 'value1', samesite='Lax')
+    # Ensure you use "add" to not overwrite existing cookie headers
+    # Set a cross-site cookie for third-party contexts
+    resp.headers.add('Set-Cookie','cookie2=value2; SameSite=None; Secure')
     return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -91,14 +96,22 @@ def search(lti=lti):
             return render_template('reuse.html', error=error)
 
     resp = make_response(jsonify(videos))
-    resp.set_cookie('cookie', 'value', samesite='None', secure=True)
+    # Set a same-site cookie for first-party contexts
+    resp.set_cookie('cookie1', 'value1', samesite='Lax')
+    # Ensure you use "add" to not overwrite existing cookie headers
+    # Set a cross-site cookie for third-party contexts
+    resp.headers.add('Set-Cookie','cookie2=value2; SameSite=None; Secure')
     return resp
 
 @app.route('/lti/reuse', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)
 def reuse(lti=lti):
     resp = make_response(render_template('reuse.html', error=error))
-    resp.set_cookie('cookie', 'value', samesite='None', secure=True)
+    # Set a same-site cookie for first-party contexts
+    resp.set_cookie('cookie1', 'value1', samesite='Lax')
+    # Ensure you use "add" to not overwrite existing cookie headers
+    # Set a cross-site cookie for third-party contexts
+    resp.headers.add('Set-Cookie','cookie2=value2; SameSite=None; Secure')
     return resp
 
 @app.route('/lti/config.xml', methods=['GET'])
