@@ -30,9 +30,9 @@ def hello_world(lti=lti):
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET'])
-@lti(request='initial', error=error, app=app)
-def index(lti=lti):
-# def index():
+# @lti(request='initial', error=error, app=app)
+# def index(lti=lti):
+def index():
     return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
