@@ -24,8 +24,8 @@ def hello_world(lti=lti):
         provider
     """
     resp = make_response(render_template('up.html', lti=lti))
-    resp.set_cookie('cross-site-cookie', 'bar', samesite='None', secure=True)
-    resp.headers.add('Content-Security-Policy', "default-src 'self'")
+    resp.set_cookie('same-site-cookie', 'foo', samesite='None')
+    resp.headers.add('Set-Cookie','cross-site-cookie=bar; SameSite=None; Secure')
     return resp
 
 @app.route('/', methods=['GET', 'POST'])
@@ -92,14 +92,16 @@ def search(lti=lti):
             return render_template('reuse.html', error=error)
 
     resp = make_response(jsonify(videos))
-    resp.set_cookie('cross-site-cookie', 'bar', samesite='None', secure=True)
+    resp.set_cookie('same-site-cookie', 'foo', samesite='None')
+    resp.headers.add('Set-Cookie','cross-site-cookie=bar; SameSite=None; Secure')
     return resp
 
 @app.route('/lti/reuse', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)
 def reuse(lti=lti):
     resp = make_response(render_template('reuse.html', error=error))
-    resp.set_cookie('cross-site-cookie', 'bar', samesite='None', secure=True)
+    resp.set_cookie('same-site-cookie', 'foo', samesite='None')
+    resp.headers.add('Set-Cookie','cross-site-cookie=bar; SameSite=None; Secure')
     return resp
 
 @app.route('/lti/config.xml', methods=['GET'])
