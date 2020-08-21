@@ -33,10 +33,10 @@ def hello_world(lti=lti):
 def index(lti=lti):
 # def index():
     # Set a same-site cookie for first-party contexts
-    resp.set_cookie('cookie1', 'value1', samesite='Lax')
-    # Ensure you use "add" to not overwrite existing cookie headers
-    # Set a cross-site cookie for third-party contexts
-    resp.headers.add('Set-Cookie','cookie2=value2; SameSite=None; Secure')
+    # resp.set_cookie('cookie1', 'value1', samesite='Lax')
+    # # Ensure you use "add" to not overwrite existing cookie headers
+    # # Set a cross-site cookie for third-party contexts
+    # resp.headers.add('Set-Cookie','cookie2=value2; SameSite=None; Secure')
     return app.send_static_file('index.html')
 
 @app.route('/search', methods=['GET', 'POST'])
