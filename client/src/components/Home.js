@@ -45,7 +45,6 @@ export default function Home() {
 
   const inputChange = (event) => setQuery(event.currentTarget.value);
   
-
   const inputKeyUp = (event) => {
     // 'Enter' key code
     if (event.keyCode === 13) {

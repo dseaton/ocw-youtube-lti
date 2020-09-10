@@ -1,6 +1,7 @@
 @use '../styles/functions/color';
 @use '../styles/colors';
 @use '@material/button';
+@use '@material/textfield';
 @use '@rmwc/tooltip/tooltip';
 
 .video-card {
@@ -38,8 +39,21 @@
     color: color.color(card-duration);
   }
 
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.25rem;
+    font-size: 14px;
+    color: color.color(card-duration);
+  }
+
+  &__buttons {
+    display: inline-block;
+  }
+
   &__duration {
-    margin-left: 6rem;
+    margin-right: 2rem;
   }
 
   .video-card__button {
@@ -53,4 +67,54 @@
       @include button.ink-color(color.color(card-disabled-button-foreground));
     }
   }
+}
+
+.video-container {
+  // display: inline-block;
+  // width: 50%;
+  overflow: hidden;
+  padding-bottom: 56.25%; // To get a 16:9 ratio
+  position: relative;
+  height: 0;
+}
+
+.video-iframe {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.video-controls {
+    display: flex;
+    //align-items: center;
+    margin: 1rem 0 0 0;
+
+  .video-controls__text-field {
+    @include textfield.fill-color(colors.$white);
+    @include textfield.ink-color(colors.$black);
+    @include textfield.label-color(colors.$boulder);
+    @include textfield.placeholder-color(colors.$boulder);
+    @include textfield.outline-color(colors.$black-20);
+    @include textfield.focused-outline-color(colors.$black-20);
+    @include textfield.hover-outline-color(colors.$black-20);
+    @include textfield.height(50px); // 2.25rem
+    @include textfield.outlined-height(36px);
+    width: 10rem;
+    margin-right: 1rem;
+  }
+
+  .video-controls__embed {
+    // @include button.height(50px);
+    @include button.container-fill-color(color.color(main-background));
+    @include button.ink-color(color.color(card-button-foreground));
+    width: 10rem;
+  }
+}
+
+.video-select {
+  padding: 1rem;
+  border: 3px solid colors.$alizarin-crimson;
+  margin-bottom: 2rem;
 }
