@@ -124,7 +124,7 @@ export default function VideoCard(props) {
               className="video-controls__text-field"
               label="Width"
               name="width"
-              placeholder="Width of video"
+              placeholder="e.g., 560"
               outlined
               value={width}
               onChange={inputChange}
@@ -133,7 +133,7 @@ export default function VideoCard(props) {
               className="video-controls__text-field"
               label="Height"
               name="height"
-              placeholder="Height of video"
+              placeholder="e.g., 315"
               outlined
               value={height}
               onChange={inputChange}
