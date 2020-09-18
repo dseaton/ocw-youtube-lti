@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Button } from '@rmwc/button';
 import { TextField } from '@rmwc/textfield';
-import { Tooltip } from '@rmwc/tooltip';
 import truncate from 'truncate';
 import './VideoCard.scss';
 
@@ -67,12 +66,8 @@ export default function VideoCard(props) {
           <div className="video-card__description">{truncate(description, 140)}</div>
           <div className="video-card__footer">
             <div className="video-card__buttons">
-              <Tooltip content="Embed complete video" showArrow>
-                <Button className="video-card__button" label="EMBED NOW" unelevated onClick={embed} />
-              </Tooltip>
-              <Tooltip content="Embed a clip of video" showArrow>
-                <Button className="video-card__button" label="SELECT CLIP" unelevated onClick={selectClip} />
-              </Tooltip>
+              <Button className="video-card__button" label="EMBED NOW" unelevated onClick={embed} />
+              <Button className="video-card__button" label="SELECT CLIP" unelevated onClick={selectClip} />
             </div>
             <span className="video-card__duration">{duration} mins</span>
           </div>
@@ -110,7 +105,7 @@ export default function VideoCard(props) {
             <TextField
               className="video-controls__text-field"
               label="Start"
-              placeholder="e.g., 1:20"
+              placeholder="e.g., 60"
               name="start"
               outlined
               value={start}
@@ -120,7 +115,7 @@ export default function VideoCard(props) {
               className="video-controls__text-field"
               label="End"
               name="end"
-              placeholder="e.g., 4:50"
+              placeholder="e.g., 60"
               outlined
               value={end}
               onChange={inputChange}

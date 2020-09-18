@@ -2,7 +2,6 @@
 @use '../styles/colors';
 @use '@material/button';
 @use '@material/textfield';
-@use '@rmwc/tooltip/tooltip';
 
 .video-card {
   margin-bottom: 1rem;
@@ -60,12 +59,6 @@
     margin-right: 2rem;
     @include button.container-fill-color(color.color(card-background));
     @include button.ink-color(color.color(card-button-foreground));
-    // We do not use disabled prop on button and disabled-container-fill-color, disabled-ink-color
-    // because we want the tooltip to appear on it
-    &--disabled {
-      @include button.container-fill-color(color.color(card-background));
-      @include button.ink-color(color.color(card-disabled-button-foreground));
-    }
   }
 }
 
