@@ -35,7 +35,8 @@ LTI_PROPERTY_LIST = [
     'lti_message',
     'lti_version',
     'roles',
-    'lis_outcome_service_url'
+    'lis_outcome_service_url',
+    'content_item_return_url' # [Added, jmc, 26/09/2020] Needed in React client form
 ]
 
 

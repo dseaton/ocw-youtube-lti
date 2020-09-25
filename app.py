@@ -3,6 +3,7 @@ import requests
 
 from isodate import parse_duration
 from flask import current_app, Flask, jsonify, make_response, redirect, render_template, request
+from jinja2 import Template
 from pylti.flask import lti
 
 
@@ -29,7 +30,10 @@ def hello_world(lti=lti):
 @app.route('/index', methods=['GET'])
 @lti(request='initial', error=error, app=app)
 def index(lti=lti):
-    return app.send_static_file('index.html')
+    # React client build entry point. It contains a "content_item_return_url" placeholder that is loaded in
+    # a JS var as it is needed in the reuse form located in client/components/VideoCard.js
+    index_template = Template(open('./client/build/index.html').read())
+    return index_template.render(content_item_return_url=lti.session.get('content_item_return_url'))
 
 @app.route('/search', methods=['GET', 'POST'])
 @lti(request='session', error=error, app=app)

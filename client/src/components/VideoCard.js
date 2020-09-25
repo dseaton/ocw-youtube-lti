@@ -73,7 +73,7 @@ export default function VideoCard(props) {
           </div>
 
           <form
-            action="https://canvas.instructure.com/courses/2066466/external_content/success/external_tool_dialog"
+            action={window.contentItemReturnUrl}
             id={`lti-content-item-return-form-${id}`}
             method="POST"
             encType="application/x-www-form-urlencoded"
